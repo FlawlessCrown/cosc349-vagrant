@@ -1,29 +1,31 @@
-MAIN_IMAGE = "ubuntu/xenial64"
+VM_VERSION = "ubuntu/xenial64"
 
 Vagrant.configure("2") do |config|
-  config.vm.define "node1_main" do |subconfig|
-    subconfig.vm.box = MAIN_IMAGE;
-    #subconfig.vm.network :forwarded_port, guest: 80, host: 8080, id: "nginx"
-    subconfig.vm.hostname = "main"
-    subconfig.vm.network :private_network, ip: "10.0.0.10"
-    subconfig.vm.provision :shell, :path => ".provision/bootstrap.sh"
+
+  config.vm.box = VM_VERSION;
+  
+  config.vm.define "webserver1" do |webserver1|
+    webserver1.vm.network :forwarded_port, guest: 80, host: 8080, host_ip: "127.0.0.1", id: "webserver1"
+    webserver1.vm.hostname = "webserver1.local" 
+    webserver1.vm.network :private_network, ip: "10.0.0.10"
+    webserver1.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    webserver1.vm.provision :shell, :path => ".provision/bootstrap_webserver_1.sh"
   end
 
-  config.vm.define "node2_mysql" do |subconfig|
-    subconfig.vm.box = MAIN_IMAGE;
-    subconfig.vm.hostname = "mysql"
-    subconfig.vm.network :private_network, ip: "10.0.0.20"
+  config.vm.define "dbserver" do |dbserver|
+    dbserver.vm.network :forwarded_port, guest: 3306, host: 3306, id: "dbserver"
+    dbserver.vm.hostname = "dbserver.local"
+    dbserver.vm.network :private_network, ip: "10.0.0.20"
+    dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    dbserver.vm.provision :shell, :path => ".provision/bootstrap_dbserver.sh"
   end
 
-  config.vm.define "node3_noidea" do |subconfig|
-    subconfig.vm.box = MAIN_IMAGE;
-    subconfig.vm.hostname = "noidea"
-    subconfig.vm.network :private_network, ip: "10.0.0.30"
+  config.vm.define "webserver2" do |webserver2|
+    webserver2.vm.network :forwarded_port, guest: 80, host: 8081, host_ip: "127.0.0.2", id: "webserver2"
+    webserver2.vm.hostname = "webserver2.local" 
+    webserver2.vm.network :private_network, ip: "10.0.0.30"
+    webserver2.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
+    webserver2.vm.provision :shell, :path => ".provision/bootstrap_webserver_2.sh"
   end
   
-  # installing provisions on all machines
-  config.vm.provision "shell", inline: <<-SHELL
-    sudo apt_get -y update
-    sudo apt-get install -y avahi-daemon libnss-mdns
-  SHELL
 end
