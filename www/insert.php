@@ -7,9 +7,9 @@ $pdo_dsn   	= "mysql:host=$db_host;dbname=$db_name";
 
 $pdo = new PDO($pdo_dsn, $db_user, $db_passwd)
 or die("ERROR: Could not connect to database");
-	
-$pdo->query("INSERT INTO webNotes (noteID, note) VALUES($_POST[wnoteID], $_POST[wnote])")
+$webnoteID = $_POST[wnoteID];
+$webnote = $_POST[wnote];
+$pdo->query("INSERT INTO webNotes (noteID, note) VALUES('$webnoteID', '$webnote')")
 or die("An unexpected error occurred when summitting your note.");
-	
-echo "Note Taken.";
+echo "Note Successfully Taken.";
 ?>
