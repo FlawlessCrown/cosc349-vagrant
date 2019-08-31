@@ -1,14 +1,19 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Note Taker</title>
+<style>
+form input{
+	width: 100%;
+}
+</style>
 </head>
-
 <body>
+
 <h1>Note Taking page</h1>
 
-<form action="insert.php" method="post">
+<form action="insert.php" method="post" autocomplete="off">
 	<p>
 		<label for="wnoteID">Note Number:</label>
 		<input type="text" name="wnoteID" id="wnoteID">
