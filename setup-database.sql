@@ -3,5 +3,4 @@ CREATE TABLE webNotes (
 	note varchar(50) NOT NULL,
 	PRIMARY KEY (noteID)
 );
-
-INSERT INTO webNotes VALUES ('1','test notes');
+INSERT INTO webNotes VALUES ('1','testing notes');
