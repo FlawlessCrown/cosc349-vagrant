@@ -14,7 +14,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "dbserver" do |dbserver|
     dbserver.vm.hostname = "dbserver"
-    dbserver.vm.network :forwarded_port, guest: 3306, host: 3306, id: "dbserver"
     dbserver.vm.network :private_network, ip: "192.168.2.12"
     dbserver.vm.synced_folder ".", "/vagrant", owner: "vagrant", group: "vagrant", mount_options: ["dmode=775,fmode=777"]
     dbserver.vm.provision :shell, :path => ".provision/bootstrap_dbserver.sh"
