@@ -12,10 +12,12 @@ To Boot Up Machines:
   - vagrant ssh webserver2
  
 webserver1:
-This is the web server for inserting data into database server.
+- This is the web server for inserting data into database server.
+- You can access this through the browser by using the following address: 192.168.2.11
 
 dbserver:
-This is a database server for storing data.
+- This is a database server for storing data.
 
 webserver2:
-This is the web server for reading data from database.
+- This is the web server for reading data from database.
+- You can access this through the browser by using the following address: 192.168.2.13
