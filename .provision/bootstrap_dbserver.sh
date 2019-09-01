@@ -17,5 +17,5 @@ cat /vagrant/db/setup-database.sql | mysql -u web_user webNotes
 sudo sed -i'' -e '/bind-address/s/127.0.0.1/0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo sed -i'' -e '/skip-external-locking/skip-external-locking/g' /etc/mysql/mysql.conf.d/mysqld.cnf
 # restart server
-echo "Restarting dbserver"
+echo "Restarting dbserver service"
 sudo service mysql restart
