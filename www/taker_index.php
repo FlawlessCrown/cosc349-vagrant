@@ -4,6 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Note Taker</title>
 <style>
+html {
+	background-color: #99e6ff;
+	font-size: 18px;
+	color: inherit;
+}
 form input{
 	width: 100%;
 }
@@ -11,7 +16,7 @@ form input{
 </head>
 <body>
 
-<h1>Note Taking page</h1>
+<h1>Note Taking Page</h1>
 
 <form action="insert.php" method="post" autocomplete="off">
 	<p>
